@@ -9,6 +9,7 @@ public class Main {
         gameOver = false;
     }
 
+    // this method will get the input from the user
     public void startGame() {
         System.out.println("Welcome to MineSweeper!");
         System.out.println("Your Game is Started!!! \nEnter");
@@ -37,6 +38,7 @@ public class Main {
         ab.close();
     }
 
+    //if the user wants to reveal cell this methods takes care of it
     private void handleReveal(int cellNumber) {
         int row = (cellNumber - 1) / 10;
         int col = (cellNumber - 1) % 10;
@@ -47,6 +49,7 @@ public class Main {
         }
     }
 
+    //if the user wants to put flag then this method takes care of it
     private void handleFlag(int cellNumber) {
         if (board.getFlagCount() < 10) board.putFlag(cellNumber);
         else System.out.println("Flag limit exceeded.");
@@ -70,6 +73,7 @@ public class Main {
         System.out.println("1. To Reveal cell\n2. Put Flag\n3. Remove Flag");
     }
 
+    //this functions will execute after the actions performed by the user
     private void postTurnActions() {
         board.printBoard();
         System.out.println("Flagged: " + board.getFlagCount());
@@ -81,6 +85,7 @@ public class Main {
         }
     }
 
+    //entry method 
     public static void main(String[] args) {
         new Main().startGame();
     }

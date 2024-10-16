@@ -16,6 +16,7 @@ public class Board {
         calculateNeighbour();
     }
 
+    //Placing Mines dynamically for every games 
     public void placeMines(int userInput) {
         Random rand = new Random();
         int minePlaced = 0;
@@ -32,6 +33,7 @@ public class Board {
         }
     }
 
+    //calculating the surroundings according to the mines assigned previously
     public Set<Integer> calculateSurroundings(int userInput) {
         Set<Integer> restricted = new HashSet<>();
         int inputIndex = userInput - 1;
@@ -51,6 +53,7 @@ public class Board {
         return this.flagCount;
     }
 
+    //print the whole board
     public void printBoard() {
         for (int row = 0; row < 10; row++) {
             for (int col = 0; col < 10; col++) {
@@ -68,6 +71,7 @@ public class Board {
         }
     }
 
+    // if the user choose reveal cell then the cell will reveal whether it is mine or number
     public boolean revealCell(int row, int col) {
         Cell cells = cell[row][col];
         if (cells.isMine()) {
@@ -81,6 +85,7 @@ public class Board {
         }
     }
 
+    //calculating neighbour to calculate the mine count for each cell
     public void calculateNeighbour() {
         for (int i = 0; i < 100; i++) {
             int row = i / 10;
@@ -126,6 +131,8 @@ public class Board {
         return false;
     }
 
+    //used bfs algorithm to check the surroundings of every cell if a cell is empty then 
+    // it will reveal all other surroundings cell if the surrounding cell also empty then it will recursively do this process
     public void checkSurroundings(int r, int c) {
         Queue<Integer> queue = new LinkedList<>();
         queue.add(r * 10 + c); 
@@ -165,7 +172,7 @@ public class Board {
         return neighbours;
     }
     
-
+    //putting flags to the cell based on the user input
     public void putFlag(int number) {
         if (flagCount<10){
             int row = (number - 1) / 10;
@@ -180,6 +187,7 @@ public class Board {
         }
     }
 
+    // removing flag on the user mentioned cell
     public boolean removeFlag(int number) {
         int row = (number - 1) / 10;
         int col = (number - 1) % 10;
@@ -191,6 +199,7 @@ public class Board {
         return false;
     }
 
+    //checking the player is win or not if the flag count is matched 
     public boolean checkWinCondition() {
         for (int row = 0; row < 10; row++) {
             for (int col = 0; col < 10; col++) {
@@ -204,6 +213,7 @@ public class Board {
         return true;
     }
     
+    //if the user choose mine cell then it will reveal all cells and the game will over
     public void revealAllMines() {
         for (int row = 0; row < 10; row++) {
             for (int col = 0; col < 10; col++) {
